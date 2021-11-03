@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    ports:
+     - "3000:8080"
+    volumes:
+      - ./src/:/go/src
+    tty: true
+    environment:
+      TZ: Asia/Tokyo
+    depends_on:
+      - mysql
+
+  mysql:
+    build: ./docker/db
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_ROOT_PASSWORD: password
+
+    ports:
+      - 13306:3306
+    volumes:
+      - "./docker/db:/etc/mysql/conf.d"
+      - mysql_volume:/var/lib/mysql
+      - "./docker/db/init:/docker-entrypoint-initdb.d"
+
+volumes:
+  mysql_volume:
