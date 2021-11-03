@@ -15,9 +15,9 @@ func Init() {
 func router() *gin.Engine {
 	r := gin.Default()
 	ctrl := root.Controller{}
-    r.GET("/", ctrl.RootGet())
+    r.GET("/", ctrl.RootGet)
 
-    r.GET("/ping", ctrl.DbPing())
+    r.GET("/ping", ctrl.DbPing)
 	
 	return r
 }
