@@ -1,5 +1,5 @@
 CREATE DATABASE test_db;
 
-CREATE TABLE test_db.test_table(id int, name varchar(256));
+CREATE TABLE test_db.test_tables(id int, name varchar(256));
 
-INSERT INTO test_db.test_table VALUES(1, "ひょーが");
+INSERT INTO test_db.test_tables VALUES(1, "ひょーが");
