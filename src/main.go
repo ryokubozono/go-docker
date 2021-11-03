@@ -2,10 +2,10 @@ package main
 
 import (
     "github.com/gin-gonic/gin"
-    "net/http"
     "fmt"
     "database/sql"
     _ "github.com/go-sql-driver/mysql"
+    "github.com/ryokubozono/go-docker/handler"
 )
 
 type User struct {
@@ -15,11 +15,7 @@ type User struct {
 
 func main() {
     engine:= gin.Default()
-    engine.GET("/", func(c *gin.Context) {
-        c.JSON(http.StatusOK, gin.H{
-            "message": "hello world",
-        })
-    })
+    engine.GET("/", handler.RootGet())
 
     engine.GET("/ping", func(c *gin.Context){
         db, err := sql.Open("mysql", "root:password@tcp(mysql:3306)/test_db")
