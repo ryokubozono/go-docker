@@ -1,0 +1,35 @@
+basePath: /
+host: 192.168.2.117:3000
+info:
+  contact: {}
+  description: An example of gin
+  license:
+    name: MIT
+  title: go-docker API
+  version: "1.0"
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      - application/x-json-stream
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - Root
+  /ping:
+    get:
+      consumes:
+      - application/json
+      - application/x-json-stream
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - Root
+swagger: "2.0"
