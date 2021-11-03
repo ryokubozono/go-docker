@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
     "github.com/ryokubozono/go-docker/service"
-
+    "log"
 )
 
 type Controller struct{}
@@ -29,7 +29,7 @@ func (pc Controller) RootGet(c *gin.Context) {
 // @Success 200
 // @Router /ping [get]
 func (pc Controller) DbPing(c *gin.Context) {
-
+    log.Print("call DbPing")
     var s root.Service
     user, _ := s.FirstTestTable(c)
 
