@@ -5,14 +5,11 @@ import (
 
 	"github.com/gin-gonic/gin"
     "github.com/ryokubozono/go-docker/db"
-
+    "github.com/ryokubozono/go-docker/entity"
 
 )
 
-type TestTable struct {
-    ID   int
-    Name string
-}
+type TestTable entity.TestTable
 
 type Controller struct{}
 
