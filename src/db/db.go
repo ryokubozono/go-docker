@@ -5,6 +5,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+    "github.com/ryokubozono/go-docker/entity"
 
 )
 
@@ -19,6 +20,8 @@ func Init() {
 	if err != nil {
 		log.Fatalf("models.Setup err: %v", err)
 	}
+
+	autoMigration()
 }
 
 // GetDB is called in models
@@ -34,5 +37,5 @@ func Close() {
 }
 
 func autoMigration() {
-	db.AutoMigrate()
+	db.AutoMigrate(&entity.TestTable{})
 }
