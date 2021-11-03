@@ -1,4 +1,4 @@
-package handler
+package root
 
 import (
 	"net/http"
@@ -14,7 +14,9 @@ type TestTable struct {
     Name string
 }
 
-func RootGet() gin.HandlerFunc {
+type Controller struct{}
+
+func (pc Controller) RootGet() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
             "message": "hello world",
@@ -22,7 +24,7 @@ func RootGet() gin.HandlerFunc {
 	}
 }
 
-func DbPing() gin.HandlerFunc{
+func (pc Controller) DbPing() gin.HandlerFunc{
 	return func(c *gin.Context){
 		db := db.GetDB()
 
