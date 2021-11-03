@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-    "github.com/ryokubozono/go-docker/models"
+    "github.com/ryokubozono/go-docker/db"
 
 
 )
@@ -24,13 +24,14 @@ func RootGet() gin.HandlerFunc {
 
 func DbPing() gin.HandlerFunc{
 	return func(c *gin.Context){
+		db := db.GetDB()
 
-        test_table := TestTable{}
+        var user TestTable
 
-        models.DB.First(&test_table, 1)
+        db.First(&user, 1)
 
         c.JSON(200, gin.H{
-            "hello": test_table.Name,
+            "hello": user.Name,
         })
 	}
 }

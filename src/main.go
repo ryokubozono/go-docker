@@ -4,15 +4,14 @@ import (
     "github.com/gin-gonic/gin"
 
     "github.com/ryokubozono/go-docker/handler"
-    "github.com/ryokubozono/go-docker/models"
+    "github.com/ryokubozono/go-docker/db"
 
 )
 
 func main() {
-    
+    db.Init()
 
-    models.Setup()
-	defer models.CloseDB()
+	defer db.Close()
 
     engine:= gin.Default()
     engine.GET("/", handler.RootGet())
@@ -20,5 +19,6 @@ func main() {
     engine.GET("/ping", handler.DbPing())
 
     engine.Run(":8080")
+    db.Close()
 }
 
