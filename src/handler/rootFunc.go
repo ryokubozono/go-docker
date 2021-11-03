@@ -2,14 +2,14 @@ package handler
 
 import (
 	"net/http"
-    "fmt"
-    "database/sql"
-    _ "github.com/go-sql-driver/mysql"
 
 	"github.com/gin-gonic/gin"
+    "github.com/ryokubozono/go-docker/models"
+
+
 )
 
-type User struct {
+type TestTable struct {
     ID   int
     Name string
 }
@@ -24,29 +24,13 @@ func RootGet() gin.HandlerFunc {
 
 func DbPing() gin.HandlerFunc{
 	return func(c *gin.Context){
-        db, err := sql.Open("mysql", "root:password@tcp(mysql:3306)/test_db")
-        defer db.Close()
-        if err != nil {
-            fmt.Println(err.Error())
-        }
 
-        rows, err := db.Query("SELECT * FROM test_table")
-        defer rows.Close()
-        if err != nil {
-            fmt.Println(err)
-        }
+        test_table := TestTable{}
 
-        user := User{}
-        for rows.Next() {
-            err = rows.Scan(&user.ID, &user.Name)
-            if err != nil {
-                fmt.Println(err)
-            }
-            fmt.Println(user)
-        }
+        models.DB.First(&test_table, 1)
 
         c.JSON(200, gin.H{
-            "hello": user.Name,
+            "hello": test_table.Name,
         })
 	}
 }
