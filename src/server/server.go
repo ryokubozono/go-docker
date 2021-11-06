@@ -53,8 +53,7 @@ func router() *gin.Engine {
 func sessionCheck(c *gin.Context) {
 	session := sessions.Default(c)
 	loginInfo := session.Get("Username")
-
-	if loginInfo == "" {
+	if loginInfo == nil {
 		c.String(http.StatusUnauthorized, "Unauthorized")
 		c.Abort()
 	} else {
