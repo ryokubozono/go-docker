@@ -10,7 +10,12 @@ type User struct {
     Password string `form:"password" binding:"required" gorm:"not null"`
 }
 
-type UsernamePasswordSignUpRequest struct {
+type CreateUserRequest struct {
+    Username string `json:"username" bson:"username"`
+    Password string `json:"password" bson:"password"`
+}
+
+type LoginRequest struct {
     Username string `json:"username" bson:"username"`
     Password string `json:"password" bson:"password"`
 }

@@ -25,7 +25,7 @@ func (s Service) FirstSampleTable(c *gin.Context) (SampleTable, error){
 	return sample, nil
 }
 
-func (s Service) UsernamePasswordSignUp(username string, password string) error {
+func (s Service) CreateUser(username string, password string) error {
 	db := db.GetDB()
 
 	passwordEncrypt, _ := crypto.PasswordEncrypt(password)
@@ -36,4 +36,21 @@ func (s Service) UsernamePasswordSignUp(username string, password string) error 
 	}
 
 	return nil
+}
+
+func (s Service) Login(username string, password string) error {
+	dbPassword := getUser(username).Password
+	log.Print(dbPassword)
+	if err := crypto.CompareHashAndPassword(dbPassword, password); err != nil {
+		return err
+	}
+	return nil
+}
+
+
+func getUser(username string) User {
+	db := db.GetDB()
+	var user User
+	db.First(&user, "username = ?", username)
+	return user
 }

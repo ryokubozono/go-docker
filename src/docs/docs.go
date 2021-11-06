@@ -45,7 +45,67 @@ var doc = `{
                 }
             }
         },
-        "/ping": {
+        "/create_user": {
+            "post": {
+                "consumes": [
+                    "application/json",
+                    "application/x-json-stream"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Root"
+                ],
+                "parameters": [
+                    {
+                        "description": "CreateUserRequest",
+                        "name": "username",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.CreateUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "consumes": [
+                    "application/json",
+                    "application/x-json-stream"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Root"
+                ],
+                "parameters": [
+                    {
+                        "description": "LoginRequest",
+                        "name": "username",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/logout": {
             "get": {
                 "consumes": [
                     "application/json",
@@ -64,8 +124,8 @@ var doc = `{
                 }
             }
         },
-        "/signup": {
-            "post": {
+        "/menu/top": {
+            "get": {
                 "consumes": [
                     "application/json",
                     "application/x-json-stream"
@@ -76,16 +136,24 @@ var doc = `{
                 "tags": [
                     "Root"
                 ],
-                "parameters": [
-                    {
-                        "description": "UsernamePasswordSignUpRequest",
-                        "name": "username",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/entity.UsernamePasswordSignUpRequest"
-                        }
+                "responses": {
+                    "200": {
+                        "description": ""
                     }
+                }
+            }
+        },
+        "/ping": {
+            "get": {
+                "consumes": [
+                    "application/json",
+                    "application/x-json-stream"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Root"
                 ],
                 "responses": {
                     "200": {
@@ -96,7 +164,18 @@ var doc = `{
         }
     },
     "definitions": {
-        "entity.UsernamePasswordSignUpRequest": {
+        "entity.CreateUserRequest": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.LoginRequest": {
             "type": "object",
             "properties": {
                 "password": {

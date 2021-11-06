@@ -1,6 +1,13 @@
 basePath: /
 definitions:
-  entity.UsernamePasswordSignUpRequest:
+  entity.CreateUserRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  entity.LoginRequest:
     properties:
       password:
         type: string
@@ -28,7 +35,45 @@ paths:
           description: ""
       tags:
       - Root
-  /ping:
+  /create_user:
+    post:
+      consumes:
+      - application/json
+      - application/x-json-stream
+      parameters:
+      - description: CreateUserRequest
+        in: body
+        name: username
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - Root
+  /login:
+    post:
+      consumes:
+      - application/json
+      - application/x-json-stream
+      parameters:
+      - description: LoginRequest
+        in: body
+        name: username
+        required: true
+        schema:
+          $ref: '#/definitions/entity.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - Root
+  /logout:
     get:
       consumes:
       - application/json
@@ -40,18 +85,23 @@ paths:
           description: ""
       tags:
       - Root
-  /signup:
-    post:
+  /menu/top:
+    get:
       consumes:
       - application/json
       - application/x-json-stream
-      parameters:
-      - description: UsernamePasswordSignUpRequest
-        in: body
-        name: username
-        required: true
-        schema:
-          $ref: '#/definitions/entity.UsernamePasswordSignUpRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - Root
+  /ping:
+    get:
+      consumes:
+      - application/json
+      - application/x-json-stream
       produces:
       - application/json
       responses:

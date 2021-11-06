@@ -15,7 +15,7 @@ var (
 )
 
 func Init() {
-	db, err = gorm.Open("mysql", "root:password@tcp(mysql:3306)/gin_db")
+	db, err = gorm.Open("mysql", "root:password@tcp(mysql:3306)/gin_db?parseTime=true")
 
 	if err != nil {
 		log.Fatalf("models.Setup err: %v", err)
