@@ -15,7 +15,7 @@ var (
 )
 
 func Init() {
-	db, err = gorm.Open("mysql", "root:password@tcp(mysql:3306)/test_db")
+	db, err = gorm.Open("mysql", "root:password@tcp(mysql:3306)/gin_db")
 
 	if err != nil {
 		log.Fatalf("models.Setup err: %v", err)
@@ -37,5 +37,5 @@ func Close() {
 }
 
 func autoMigration() {
-	db.AutoMigrate(&entity.TestTable{})
+	db.AutoMigrate(&entity.SampleTable{}, &entity.User{})
 }

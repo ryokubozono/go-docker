@@ -31,7 +31,7 @@ func (pc Controller) RootGet(c *gin.Context) {
 func (pc Controller) DbPing(c *gin.Context) {
     log.Print("call DbPing")
     var s root.Service
-    user, _ := s.FirstTestTable(c)
+    user, _ := s.FirstSampleTable(c)
 
     c.JSON(200, gin.H{
         "hello": user.Name,

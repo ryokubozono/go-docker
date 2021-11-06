@@ -19,7 +19,7 @@ DB_HOST="mysql"
 DB_PORT=3306
 DB_USERNAME=root
 DB_PASSWORD=password
-DB_DATABASE=test_db
+DB_DATABASE=gin_db
 ```
 
 docker

@@ -8,15 +8,15 @@ import (
 
 )
 
-type TestTable entity.TestTable
+type SampleTable entity.SampleTable
 type Service struct{}
 
-func (s Service) FirstTestTable(c *gin.Context) (TestTable, error){
+func (s Service) FirstSampleTable(c *gin.Context) (SampleTable, error){
 
 	db := db.GetDB()
-	var user TestTable
+	var sample SampleTable
 
-	db.First(&user, 1)
+	db.First(&sample, 1)
 
-	return user, nil
+	return sample, nil
 }
