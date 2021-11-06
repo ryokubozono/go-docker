@@ -20,7 +20,8 @@ services:
     environment:
       TZ: Asia/Tokyo
       MYSQL_ROOT_PASSWORD: password
-
+    cap_add:
+      - SYS_NICE
     ports:
       - 13306:3306
     volumes:
