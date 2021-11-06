@@ -25,5 +25,7 @@ func router() *gin.Engine {
 	
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	r.POST("/signup", ctrl.SignUp)
+
 	return r
 }

@@ -1,4 +1,12 @@
 basePath: /
+definitions:
+  entity.UsernamePasswordSignUpRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
 host: 192.168.2.117:3000
 info:
   contact: {}
@@ -25,6 +33,25 @@ paths:
       consumes:
       - application/json
       - application/x-json-stream
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      tags:
+      - Root
+  /signup:
+    post:
+      consumes:
+      - application/json
+      - application/x-json-stream
+      parameters:
+      - description: UsernamePasswordSignUpRequest
+        in: body
+        name: username
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UsernamePasswordSignUpRequest'
       produces:
       - application/json
       responses:

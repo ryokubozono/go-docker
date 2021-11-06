@@ -9,3 +9,8 @@ type User struct {
     Username string `form:"username" binding:"required" gorm:"unique;not null"`
     Password string `form:"password" binding:"required" gorm:"not null"`
 }
+
+type UsernamePasswordSignUpRequest struct {
+    Username string `json:"username" bson:"username"`
+    Password string `json:"password" bson:"password"`
+}

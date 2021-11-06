@@ -63,6 +63,49 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/signup": {
+            "post": {
+                "consumes": [
+                    "application/json",
+                    "application/x-json-stream"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Root"
+                ],
+                "parameters": [
+                    {
+                        "description": "UsernamePasswordSignUpRequest",
+                        "name": "username",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.UsernamePasswordSignUpRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "entity.UsernamePasswordSignUpRequest": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
         }
     }
 }`

@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
     "github.com/ryokubozono/go-docker/service"
+	"github.com/ryokubozono/go-docker/entity"
     "log"
 )
 
@@ -37,4 +38,33 @@ func (pc Controller) DbPing(c *gin.Context) {
         "hello": user.Name,
     })
 
+}
+
+// @Tags Root
+// @Accept json
+// @Produce json
+// @accept application/x-json-stream
+// @Param username body entity.UsernamePasswordSignUpRequest true "UsernamePasswordSignUpRequest"
+// @Success 200
+// @Router /signup [post]
+func (pc Controller) SignUp(c *gin.Context) {
+
+    var request entity.UsernamePasswordSignUpRequest
+
+    err := c.BindJSON(&request)
+
+    if err != nil {
+		c.String(http.StatusBadRequest, "Bad request")
+        return    
+    } else {
+        var s root.Service
+        err := s.UsernamePasswordSignUp(request.Username, request.Password)
+        if err != nil {
+            c.String(http.StatusBadRequest, "Bad request")
+            return
+        }
+    }
+
+    c.Status(http.StatusOK)
+    return
 }
