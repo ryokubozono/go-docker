@@ -5,12 +5,11 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-    "github.com/ryokubozono/go-docker/entity"
-
+	"github.com/ryokubozono/go-docker/entity"
 )
 
 var (
-	db *gorm.DB
+	db  *gorm.DB
 	err error
 )
 

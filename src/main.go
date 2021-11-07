@@ -1,10 +1,8 @@
 package main
 
 import (
-
     "github.com/ryokubozono/go-docker/db"
     "github.com/ryokubozono/go-docker/server"
-
 )
 
 // @title go-docker API
@@ -19,7 +17,6 @@ func main() {
     db.Init()
     server.Init()
 
-	defer db.Close()
+    defer db.Close()
 
 }
-

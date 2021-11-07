@@ -1,21 +1,18 @@
-package root
+package service
 
 import (
 	"github.com/gin-gonic/gin"
-	// "net/http"
-	"github.com/ryokubozono/go-docker/pkg/crypto"
-
+	"github.com/ryokubozono/go-docker/db"
 	"github.com/ryokubozono/go-docker/entity"
-    "github.com/ryokubozono/go-docker/db"
-	"log"
+	"github.com/ryokubozono/go-docker/pkg/crypto"
 )
 
 type SampleTable entity.SampleTable
 type User entity.User
 
-type Service struct{}
+type RootService struct{}
 
-func (s Service) FirstSampleTable(c *gin.Context) (SampleTable, error){
+func (s RootService) FirstSampleTable(c *gin.Context) (SampleTable, error) {
 
 	db := db.GetDB()
 	var sample SampleTable
@@ -25,28 +22,26 @@ func (s Service) FirstSampleTable(c *gin.Context) (SampleTable, error){
 	return sample, nil
 }
 
-func (s Service) CreateUser(username string, password string) error {
+func (s RootService) CreateUser(username string, password string) error {
 	db := db.GetDB()
 
 	passwordEncrypt, _ := crypto.PasswordEncrypt(password)
 	err := db.Create(&User{Username: username, Password: passwordEncrypt}).Error
 	if err != nil {
-		log.Print(err)
 		return err
 	}
 
 	return nil
 }
 
-func (s Service) Login(username string, password string) error {
+func (s RootService) Login(username string, password string) error {
 	dbPassword := getUser(username).Password
-	log.Print(dbPassword)
+
 	if err := crypto.CompareHashAndPassword(dbPassword, password); err != nil {
 		return err
 	}
 	return nil
 }
-
 
 func getUser(username string) User {
 	db := db.GetDB()

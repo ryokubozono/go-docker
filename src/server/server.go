@@ -1,17 +1,16 @@
 package server
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
-	"github.com/swaggo/gin-swagger"
-	"github.com/swaggo/files"
-    "github.com/ryokubozono/go-docker/controller"
-    "github.com/ryokubozono/go-docker/docs"
-    "github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
-)
+	"github.com/gin-gonic/gin"
+	"github.com/ryokubozono/go-docker/controller"
+	"github.com/ryokubozono/go-docker/docs"
+	"github.com/ryokubozono/go-docker/middleware/jwt"
 
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+)
 
 // Init is initialize server
 func Init() {
@@ -21,16 +20,17 @@ func Init() {
 
 func router() *gin.Engine {
 	docs.SwaggerInfo.BasePath = "/"
+
 	r := gin.Default()
 
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
-	
-	ctrl := controller.RootController{}
-    r.GET("/", ctrl.RootGet)
 
-    r.GET("/ping", ctrl.DbPing)
-	
+	ctrl := controller.RootController{}
+	r.GET("/", ctrl.RootGet)
+
+	r.GET("/ping", ctrl.DbPing)
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.POST("/create_user", ctrl.CreateUser)
@@ -42,21 +42,10 @@ func router() *gin.Engine {
 	menu_ctrl := controller.MenuController{}
 
 	menu := r.Group("menu")
-	menu.Use(sessionCheck)
+	menu.Use(jwt.JWT())
 	{
 		menu.GET("/top", menu_ctrl.Top)
 	}
 
 	return r
-}
-
-func sessionCheck(c *gin.Context) {
-	session := sessions.Default(c)
-	loginInfo := session.Get("Username")
-	if loginInfo == nil {
-		c.String(http.StatusUnauthorized, "Unauthorized")
-		c.Abort()
-	} else {
-		c.Next()
-	}
 }

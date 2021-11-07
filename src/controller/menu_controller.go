@@ -1,10 +1,9 @@
 package controller
 
 import (
-	"net/http"
+    "net/http"
 
-	"github.com/gin-gonic/gin"
-
+    "github.com/gin-gonic/gin"
 )
 
 type MenuController struct{}
@@ -15,7 +14,7 @@ type MenuController struct{}
 // @accept application/x-json-stream
 // @Success 200
 // @Security BasicAuth
-// @Router /menu/top [get]    
+// @Router /menu/top [get]
 func (pc MenuController) Top(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{
         "message": "hello world",
