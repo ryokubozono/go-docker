@@ -95,6 +95,8 @@ paths:
       responses:
         "200":
           description: ""
+      security:
+      - BasicAuth: []
       tags:
       - Root
   /ping:
@@ -109,4 +111,7 @@ paths:
           description: ""
       tags:
       - Root
+securityDefinitions:
+  BasicAuth:
+    type: basic
 swagger: "2.0"

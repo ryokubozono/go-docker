@@ -126,6 +126,11 @@ var doc = `{
         },
         "/menu/top": {
             "get": {
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json",
                     "application/x-json-stream"
@@ -185,6 +190,11 @@ var doc = `{
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
         }
     }
 }`

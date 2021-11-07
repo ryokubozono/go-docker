@@ -112,6 +112,11 @@
         },
         "/menu/top": {
             "get": {
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json",
                     "application/x-json-stream"
@@ -171,6 +176,11 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
         }
     }
 }
