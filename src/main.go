@@ -9,7 +9,7 @@ import (
 // @version 1.0
 // @description An example of gin
 // @license.name MIT
-// @host 192.168.2.117:3000
+// @host localhost:3000
 // @BasePath /
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
