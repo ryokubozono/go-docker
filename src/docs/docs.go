@@ -128,7 +128,7 @@ var doc = `{
             "get": {
                 "security": [
                     {
-                        "BasicAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "consumes": [
@@ -193,8 +193,10 @@ var doc = `{
         }
     },
     "securityDefinitions": {
-        "BasicAuth": {
-            "type": "basic"
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`
@@ -211,7 +213,7 @@ type swaggerInfo struct {
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
 	Version:     "1.0",
-	Host:        "192.168.2.117:3000",
+	Host:        "localhost:3000",
 	BasePath:    "/",
 	Schemes:     []string{},
 	Title:       "go-docker API",

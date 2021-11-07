@@ -9,7 +9,7 @@
         },
         "version": "1.0"
     },
-    "host": "192.168.2.117:3000",
+    "host": "localhost:3000",
     "basePath": "/",
     "paths": {
         "/": {
@@ -114,7 +114,7 @@
             "get": {
                 "security": [
                     {
-                        "BasicAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "consumes": [
@@ -179,8 +179,10 @@
         }
     },
     "securityDefinitions": {
-        "BasicAuth": {
-            "type": "basic"
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }
