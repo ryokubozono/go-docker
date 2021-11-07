@@ -14,7 +14,7 @@ definitions:
       username:
         type: string
     type: object
-host: 192.168.2.117:3000
+host: localhost:3000
 info:
   contact: {}
   description: An example of gin
@@ -95,6 +95,8 @@ paths:
       responses:
         "200":
           description: ""
+      security:
+      - ApiKeyAuth: []
       tags:
       - Root
   /ping:
@@ -109,4 +111,9 @@ paths:
           description: ""
       tags:
       - Root
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

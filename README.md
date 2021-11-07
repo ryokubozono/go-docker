@@ -29,7 +29,20 @@ docker-compose build
 docker-compose up
 ```
 
-swagger
+## usage
+
+api base url
+
+```
+http://localhost:3000/
+```
+
+swagger url
+```
+http://localhost:3000/swagger/index.html
+```
+
+update swagger
 
 ```
 docker exec -it go-docker_app_1 /bin/sh
@@ -39,15 +52,7 @@ docker exec -it go-docker_app_1 /bin/sh
 /go/src # swag init
 ```
 
-## usage
-
-api
-
+update go.mod
 ```
-http://localhost:3000/
-```
-
-swagger
-```
-http://localhost:3000/swagger/index.html
+docker-compose run --rm app go mod tidy
 ```

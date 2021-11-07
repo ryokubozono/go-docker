@@ -9,7 +9,7 @@
         },
         "version": "1.0"
     },
-    "host": "192.168.2.117:3000",
+    "host": "localhost:3000",
     "basePath": "/",
     "paths": {
         "/": {
@@ -112,6 +112,11 @@
         },
         "/menu/top": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json",
                     "application/x-json-stream"
@@ -171,6 +176,13 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }
