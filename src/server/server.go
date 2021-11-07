@@ -37,8 +37,6 @@ func router() *gin.Engine {
 
 	r.POST("/login", ctrl.Login)
 
-	r.GET("/logout", ctrl.Logout)
-
 	menu_ctrl := controller.MenuController{}
 
 	menu := r.Group("menu")

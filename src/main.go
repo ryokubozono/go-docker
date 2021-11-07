@@ -11,8 +11,9 @@ import (
 // @license.name MIT
 // @host 192.168.2.117:3000
 // @BasePath /
-// @securityDefinitions.basic BasicAuth
-
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
     db.Init()
     server.Init()

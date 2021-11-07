@@ -10,24 +10,18 @@ import (
 	"github.com/ryokubozono/go-docker/pkg/util"
 )
 
-type tokenRequest struct {
-	Token string
-}
-
 // JWT is jwt middleware
 func JWT() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var code int
 		var data interface{}
-		var request tokenRequest
 
-		if err := c.BindJSON(&request); err != nil {
-			c.String(http.StatusBadRequest, "Bad request")
+		if len(c.GetHeader("Authorization")) == 0 {
 			return
 		}
 
 		code = e.SUCCESS
-		token := request.Token
+		token := c.GetHeader("Authorization")
 		if token == "" {
 			code = e.INVALID_PARAMS
 		} else {
